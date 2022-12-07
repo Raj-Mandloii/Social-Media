@@ -1,0 +1,19 @@
+import mongoose from "mongoose";
+
+
+// to attain some uniformity we use schema 
+const postSchema = mongoose.Schema({
+    title: String,
+    message: String,
+    creator: String,
+    tags: [String],
+    selectedFile: String,
+    likeCound: {
+        type: Number,
+        default: 0,
+    },
+    createdAt:{
+        type: Date,
+        default: new Date(),
+    }
+})
