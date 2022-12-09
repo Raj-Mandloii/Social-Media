@@ -1,7 +1,8 @@
 import React from 'react'
-
+import useStyles from "./styles.js"
 export const Post = () => {
-  return (
-    <div>post</div>
-  )
+    const classes = useStyles();
+    return (
+        <div>post</div>
+    )
 }
