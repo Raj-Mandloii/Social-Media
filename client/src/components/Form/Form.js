@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import useStyles from "./styles.js";
 import FileBase from "react-file-base64"
 import { useDispatch } from 'react-redux';
-import { createPost } from '../../api/index.js';
+import { createPost } from '../../actions/posts.js';
 
 export const Form = () => {
     const [postData, setPostData] = useState({
@@ -72,7 +72,7 @@ export const Form = () => {
                     <FileBase
                         type="file"
                         multiple={false}
-                        onDone={(base64) => setPostData({ ...postData, selectedFile: base64 })}
+                        onDone={({base64}) => setPostData({ ...postData, selectedFile: base64 })}
                     />
                 </div>
                 <Button className={classes.buttonSubmit}
