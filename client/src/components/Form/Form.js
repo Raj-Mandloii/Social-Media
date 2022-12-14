@@ -1,11 +1,13 @@
 import { Button, Paper, TextField, Typography } from '@material-ui/core';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import useStyles from "./styles.js";
 import FileBase from "react-file-base64"
-import { useDispatch } from 'react-redux';
-import { createPost } from '../../actions/posts.js';
+import { useDispatch, useSelector } from 'react-redux';
+import { createPost,updatePost  } from '../../actions/posts.js';
 
-export const Form = () => {
+
+export const Form = ({ currentId, setCurrentId }) => {
+
     const [postData, setPostData] = useState({
         creator: "",
         title: "",
@@ -14,13 +16,25 @@ export const Form = () => {
         selectedFile: ""
     })
 
+    const post = useSelector((store)=>currentId ? store.posts.find((p)=> p._id === currentId): null)
 
     const dispatch = useDispatch();
     const classes = useStyles();
-
+    useEffect(()=>{
+        console.log(post)
+        if(post){
+            setPostData(post)
+        }
+    },[post])
     const handleSubmit = (e) => {
         e.preventDefault();
-        dispatch(createPost(postData))
+        if (currentId) {
+            dispatch(updatePost(currentId, postData))
+
+        } else {
+
+            dispatch(createPost(postData))
+        }
     }
     const clear = () => {
 
@@ -72,13 +86,13 @@ export const Form = () => {
                     <FileBase
                         type="file"
                         multiple={false}
-                        onDone={({base64}) => setPostData({ ...postData, selectedFile: base64 })}
+                        onDone={({ base64 }) => setPostData({ ...postData, selectedFile: base64 })}
                     />
                 </div>
                 <Button className={classes.buttonSubmit}
                     variant="contained" color='primary'
                     size='large' type='submit' fullWidth
-                    onClick={(e)=> handleSubmit(e)}
+                    onClick={(e) => handleSubmit(e)}
                 >Submit</Button>
                 <Button
                     variant="contained" color='secondary'
