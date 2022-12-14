@@ -1,14 +1,18 @@
 import React from 'react'
 import useStyles from "./styles.js"
-
 import { Card, CardActions, CardContent, CardMedia, Button, Typography } from "@material-ui/core"
-
 import ThumpUpAllIcon from "@material-ui/icons/ThumbUpAlt";
 import DeleteIcon from "@material-ui/icons/Delete"
 import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
-import moment from "moment"
-export const Post = ({ post,setCurrentId }) => {
+import moment from "moment";
+import { useDispatch } from 'react-redux';
+import { deletePost } from "../../../actions/posts.js"
+
+
+
+export const Post = ({ post, setCurrentId }) => {
     const classes = useStyles();
+    const dispatch = useDispatch()
     return (
         <Card className={classes.card}>
             <CardMedia className={classes.media}
@@ -22,7 +26,7 @@ export const Post = ({ post,setCurrentId }) => {
             <div className={classes.overlay2}>
                 <Button style={{ color: "white" }}
                     size={"small"}
-                    onClick={() => { setCurrentId(post._id)}}>
+                    onClick={() => { setCurrentId(post._id) }}>
                     <MoreHorizIcon fontSize='medium' />
 
                 </Button>
@@ -32,12 +36,16 @@ export const Post = ({ post,setCurrentId }) => {
                     {post.tags.map((tag) => (
                         `#${tag}`
                     ))}
-
                 </Typography>
             </div>
+            <Typography className={classes.title}
+                variant='h5' gutterBottom>
+                {post.title}
+
+            </Typography>
             <CardContent>
 
-                <Typography className={classes.title}
+                <Typography
                     variant='h5' gutterBottom>
                     {post.message}
 
@@ -46,15 +54,15 @@ export const Post = ({ post,setCurrentId }) => {
             <CardActions className={classes.cardActions}>
                 <Button size="small" color='primary'
                     onClick={() => { }}>
-                    <ThumpUpAllIcon fontSize='small'/>
+                    <ThumpUpAllIcon fontSize='small' />
                     Like
                     {post.likeCount}
                 </Button>
                 <Button size="small" color='primary'
-                    onClick={() => { }}>
-                    <DeleteIcon fontSize='small'/>
+                    onClick={() => dispatch(deletePost(post._id))}>
+                    <DeleteIcon fontSize='small' />
                     Delete
-                    
+
                 </Button>
             </CardActions>
         </Card>

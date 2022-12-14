@@ -15,6 +15,7 @@ app.use("/posts",postRoutes)
 
 
 
+
 // to limit the size of images they client will send
 app.use(bodyParser.json({limit: "30mb",extended:true}))
 
