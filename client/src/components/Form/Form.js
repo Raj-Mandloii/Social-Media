@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import useStyles from "./styles.js";
 import FileBase from "react-file-base64"
 import { useDispatch, useSelector } from 'react-redux';
-import { createPost,updatePost  } from '../../actions/posts.js';
+import { createPost, updatePost } from '../../actions/posts.js';
 
 
 export const Form = ({ currentId, setCurrentId }) => {
@@ -16,16 +16,16 @@ export const Form = ({ currentId, setCurrentId }) => {
         selectedFile: ""
     })
 
-    const post = useSelector((store)=>currentId ? store.posts.find((p)=> p._id === currentId): null)
+    const post = useSelector((store) => currentId ? store.posts.find((p) => p._id === currentId) : null)
 
     const dispatch = useDispatch();
     const classes = useStyles();
-    useEffect(()=>{
+    useEffect(() => {
         console.log(post)
-        if(post){
+        if (post) {
             setPostData(post)
         }
-    },[post])
+    }, [post])
     const handleSubmit = (e) => {
         e.preventDefault();
         if (currentId) {
@@ -98,7 +98,7 @@ export const Form = ({ currentId, setCurrentId }) => {
                     variant="contained" color='secondary'
                     size='small' type='submit' fullWidth
                     onClick={clear}
-                >Submit</Button>
+                >Clear</Button>
             </form>
         </Paper>
     )
