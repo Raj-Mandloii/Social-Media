@@ -62,7 +62,6 @@ export const Post = ({ post, setCurrentId }) => {
                     onClick={() => dispatch(deletePost(post._id))}>
                     <DeleteIcon fontSize='small' />
                     Delete
-
                 </Button>
             </CardActions>
         </Card>
