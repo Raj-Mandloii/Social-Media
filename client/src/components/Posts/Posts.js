@@ -6,7 +6,7 @@ import { CircularProgress, Grid } from '@material-ui/core'
 
 export const Posts = ({setCurrentId}) => {
     const posts = useSelector((store) => store.posts)
-
+    console.log("THIS IS POSTS _____",posts)
     const classes = useStyles();
     return (
         !posts.length ?

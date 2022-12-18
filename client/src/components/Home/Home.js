@@ -11,8 +11,9 @@ import useStyles from "./styles.js"
     const dispatch = useDispatch();
     const [currentId, setCurrentId] = useState(0);
 
-
+    console.log("Comp is rendering")
     useEffect(() => {
+        console.log("User effect is calling ++ Current Id",currentId)
         dispatch(getPosts());
     }, [currentId, dispatch])
 

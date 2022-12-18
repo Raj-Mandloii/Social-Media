@@ -29,6 +29,7 @@ export const Form = ({ currentId, setCurrentId }) => {
     const handleSubmit = (e) => {
         e.preventDefault();
         if (currentId) {
+            console.log("Current id exists ::::::")
             dispatch(updatePost(currentId, postData))
         } else {
             dispatch(createPost(postData));

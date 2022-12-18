@@ -1,9 +1,10 @@
 
 import * as api from "../api";
-import {FETCH_ALL,CREATE,UPDATE,DELETE,LIKE} from "../constants/actionType"
+import { FETCH_ALL, CREATE, UPDATE, DELETE, LIKE } from "../constants/actionType"
 // action creaters 
 
 export const getPosts = () => async (dispatch) => {
+    console.log("The get api is calling ______")
     try {
         const { data } = await api.fetchPosts();
         dispatch({ type: FETCH_ALL, payload: data });
@@ -30,6 +31,7 @@ export const createPost = (post) => async (dispatch) => {
 export const updatePost = (id, post) => async (dispatch) => {
     try {
         const { data } = await api.updatePost(id, post)
+        console.log('This is the updated data :::::',data)
         dispatch({ type: UPDATE, payload: data })
     } catch (e) {
         console.log(e)
@@ -49,7 +51,7 @@ export const deletePost = (id) => async (dispatch) => {
 export const likePost = (id) => async (dispatch) => {
     try {
         const { data } = await api.likePost(id)
-        dispatch({ type:LIKE, payload: data })
+        dispatch({ type: LIKE, payload: data })
     } catch (e) {
         console.log(e)
     }

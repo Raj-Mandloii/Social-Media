@@ -26,7 +26,10 @@ export const Post = ({ post, setCurrentId }) => {
             <div className={classes.overlay2}>
                 <Button style={{ color: "white" }}
                     size={"small"}
-                    onClick={() => setCurrentId(post._id)}>
+                    onClick={(e) => {
+                        e.stopPropagation();
+                        setCurrentId(post._id);
+                      }}>
                     <MoreHorizIcon fontSize='medium' />
 
                 </Button>
