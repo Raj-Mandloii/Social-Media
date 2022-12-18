@@ -1,12 +1,23 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { AppBar, Typography,Button,Toolbar } from '@material-ui/core';
 import useStyles from "./styles.js"
 import memories from '../../images/memories.png'
 import { Link } from "react-router-dom"
 const NavBar = () => {
     const classes = useStyles();
-    const user = null
-    return (
+    const [user,setUser] = useState(JSON.parse(localStorage.getItem("profile")))
+    console.log(user)
+
+    useEffect(() => {
+      const token = user?.token;
+
+
+      setUser(JSON.parse(localStorage.getItem("profile")))
+    
+     
+    }, [])
+    
+     return (
         <AppBar className={classes.appBar} position="static" color="inherit">
             <div className={classes.brandContainer}>
                 <Typography component={Link} to='/' className={classes.heading} variant="h2" align="center" >Memories</Typography>
